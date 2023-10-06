@@ -2,9 +2,12 @@
 <html>
 <head>
     <title>LUDHA</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div id="map" class="map"></div>
+    <div id="info-table">
     <div class="gis-table">
     <h1>GIS LUDHA POINT</h1>
     <table id="gisTable" border="1">
@@ -47,7 +50,7 @@
     </table>
 </div>
 
-
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
     <script type="module" src="./script.js"></script>
 </body>
 </html>
