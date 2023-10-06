@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const pointTable = document.getElementById("gisTable").getElementsByTagName('tbody')[0];
 
-    fetch("polygon.json") // Ganti "data.json" dengan nama file JSON Anda
+document.addEventListener("DOMContentLoaded", () => {
+    const pointTable = document.getElementById("pointTable").getElementsByTagName('tbody')[0];
+
+    fetch("https://raw.githubusercontent.com/ludha/GIS/main/waypoint.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
@@ -21,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const pointTable = document.getElementById("gisTable2").getElementsByTagName('tbody')[0];
+    const pointTable = document.getElementById("polygonTable").getElementsByTagName('tbody')[0];
 
-    fetch("polygon.json") // Ganti "data.json" dengan nama file JSON Anda
+    fetch("https://raw.githubusercontent.com/ludha/GIS/main/polygon.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nameCell = row.insertCell(0);
                     const coordinatesCell = row.insertCell(1);
                     const typeCell = row.insertCell(2);
-                    nameCell.innerText = feature.properties.alamat;
+                    nameCell.innerText = feature.properties.name;
                     coordinatesCell.innerText = JSON.stringify(feature.geometry.coordinates);
                     typeCell.innerText = feature.geometry.type;
                     
@@ -43,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const pointTable = document.getElementById("gisTable3").getElementsByTagName('tbody')[0];
+    const pointTable = document.getElementById("polylineTable").getElementsByTagName('tbody')[0];
 
-    fetch("polygon.json") // Ganti "data.json" dengan nama file JSON Anda
+    fetch("https://raw.githubusercontent.com/ludha/GIS/main/polyline.json") // Ganti "data.json" dengan nama file JSON Anda
         .then(response => response.json())
         .then(data => {
             data.features.forEach(feature => {
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nameCell = row.insertCell(0);
                     const coordinatesCell = row.insertCell(1);
                     const typeCell = row.insertCell(2);
-                    nameCell.innerText = feature.properties.name ;
+                    nameCell.innerText = feature.properties.name;
                     coordinatesCell.innerText = JSON.stringify(feature.geometry.coordinates);
                     typeCell.innerText = feature.geometry.type;
                     
@@ -72,28 +73,27 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         ],
         view: new ol.View({
-            center: ol.proj.fromLonLat([107.60701584098513,-6.914777351366908]),
+            center: ol.proj.fromLonLat([109.327887,-7.103006]),
             zoom: 13.5
         })
     });
 
- // Mendownload data waypoint, line string, dan polyline
+    // Mendownload data waypoint, line string, dan polyline
     const waypointSource = new ol.source.Vector({
-        url: 'waypoint.json',
+        url: 'https://raw.githubusercontent.com/ludha/GIS/main/waypoint.json',
         format: new ol.format.GeoJSON()
     });
 
     const lineStringSource = new ol.source.Vector({
-        url: 'polygon.json',
+        url: 'https://raw.githubusercontent.com/ludha/GIS/main/polygon.json',
         format: new ol.format.GeoJSON()
     });
 
     const polylineSource = new ol.source.Vector({
-        url: 'polyline.json',
+        url: 'https://raw.githubusercontent.com/ludha/GIS/main/polyline.json',
         format: new ol.format.GeoJSON()
     });
 
-    
     // Membuat layer untuk waypoint, line string, dan polyline
     const waypointLayer = new ol.layer.Vector({
         source: waypointSource,
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('featureType').textContent = 'Polyline';
         document.getElementById('featureCoords').textContent = polylineCoords.toString();
     });
-
+});
 
 
     // Menambahkan layer ke peta
@@ -197,4 +197,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('featureType').textContent = 'Polyline';
         document.getElementById('featureCoords').textContent = polylineCoords.toString();
     });
-});
+
